@@ -1,6 +1,5 @@
-// client/src/components/SqlConsole.tsx — Local SQL console with predefined queries
+// client/src/components/SqlConsole.tsx — Local SQL console (simplified)
 import { useState } from "react";
-import { Play, CircleDot } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { runPredefinedQuery, PREDEFINED_QUERIES, type QueryResult } from "@/lib/database";
 import { useDatabase } from "@/contexts/DatabaseContext";
@@ -38,53 +37,46 @@ export default function SqlConsole() {
   return (
     <div className="instrument-panel">
       <div className="panel-header">
-        <CircleDot className={`w-2.5 h-2.5 ${executing ? "text-primary led-pulse" : "text-muted-foreground"}`} />
-        <span>Local SQL Console</span>
+        <span>SQL Console</span>
         {execTime !== null && (
-          <span className="ml-auto text-[10px] font-mono text-muted-foreground normal-case tracking-normal">
-            {execTime}ms local
+          <span className="ml-auto text-[10px] text-muted-foreground/60 normal-case tracking-normal">
+            {execTime}ms
           </span>
         )}
       </div>
 
-      <div className="p-4 space-y-3">
-        {/* Query selector */}
+      <div className="space-y-3">
         <div className="flex gap-2 items-center">
           <select
             value={selectedQuery}
             onChange={(e) => setSelectedQuery(e.target.value)}
-            className="flex-1 bg-background border border-border rounded-sm px-3 py-1.5 font-mono text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-ring"
+            className="flex-1 bg-input border-0 rounded-sm px-3 py-1.5 text-[12px] text-foreground focus:outline-none focus:ring-1 focus:ring-ring"
           >
             {QUERY_OPTIONS.map((q) => (
-              <option key={q.id} value={q.id}>
-                {q.label}
-              </option>
+              <option key={q.id} value={q.id}>{q.label}</option>
             ))}
           </select>
           <Button
             size="sm"
             onClick={handleRun}
             disabled={executing || recordCount === 0}
-            className="gap-1.5"
+            className="text-[11px] px-3 py-1"
           >
-            <Play className="w-3.5 h-3.5" />
             Run
           </Button>
         </div>
 
-        {/* SQL preview */}
-        <pre className="bg-background border border-border rounded-sm p-3 text-[11px] font-mono text-muted-foreground overflow-x-auto whitespace-pre-wrap">
+        <pre className="bg-input/50 rounded-sm p-3 text-[11px] text-muted-foreground overflow-x-auto whitespace-pre-wrap">
           {PREDEFINED_QUERIES[selectedQuery]}
         </pre>
 
-        {/* Results table */}
         {result && result.rows.length > 0 && (
-          <div className="overflow-x-auto border border-border rounded-sm">
+          <div className="overflow-x-auto">
             <table className="w-full data-readout">
               <thead>
-                <tr className="border-b border-border bg-secondary/50">
+                <tr className="border-b border-border/40">
                   {result.columns.map((col) => (
-                    <th key={col} className="px-3 py-1.5 text-left text-[11px] uppercase tracking-wider text-muted-foreground font-medium">
+                    <th key={col} className="px-2 py-1.5 text-left text-[10px] uppercase tracking-wider text-muted-foreground font-normal">
                       {col}
                     </th>
                   ))}
@@ -92,10 +84,10 @@ export default function SqlConsole() {
               </thead>
               <tbody>
                 {result.rows.map((row, i) => (
-                  <tr key={i} className="border-b border-border/50 last:border-0">
+                  <tr key={i} className="border-b border-border/20 last:border-0">
                     {result.columns.map((col) => (
-                      <td key={col} className="px-3 py-1.5 text-xs">
-                        {String(row[col] ?? "—")}
+                      <td key={col} className="px-2 py-1 text-[12px] text-foreground/80">
+                        {String(row[col] ?? "\u2014")}
                       </td>
                     ))}
                   </tr>
@@ -106,11 +98,11 @@ export default function SqlConsole() {
         )}
 
         {result && result.rows.length === 0 && (
-          <p className="text-xs text-muted-foreground">No results returned.</p>
+          <p className="text-[12px] text-muted-foreground">No results.</p>
         )}
 
         {recordCount === 0 && (
-          <p className="text-xs text-muted-foreground">Load data to run queries.</p>
+          <p className="text-[12px] text-muted-foreground/60">Load data to run queries.</p>
         )}
       </div>
     </div>
