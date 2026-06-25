@@ -38,7 +38,7 @@ export default function AnalysisPanel() {
     return (
       <div className="instrument-panel">
         <div className="panel-header"><span>Analysis</span></div>
-        <p className="text-[12px] text-muted-foreground/60">Load data to view analysis.</p>
+        <p className="text-sm text-muted-foreground/60">Load data to view analysis.</p>
       </div>
     );
   }
@@ -47,7 +47,7 @@ export default function AnalysisPanel() {
     <div className="instrument-panel">
       <div className="panel-header">
         <span>Analysis</span>
-        <Button size="sm" variant="ghost" onClick={runAnalysis} disabled={loading} className="ml-auto text-[10px] h-5 px-2">
+        <Button size="sm" variant="ghost" onClick={runAnalysis} disabled={loading} className="ml-auto text-xs h-6 px-3">
           Refresh
         </Button>
       </div>
@@ -55,10 +55,10 @@ export default function AnalysisPanel() {
       {data && (
         <div className="space-y-4">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground mb-2">Risk Distribution</p>
-            <div className="space-y-1">
+            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2">Risk Distribution</p>
+            <div className="space-y-1.5">
               {Object.entries(data.riskDist).map(([band, count]) => (
-                <div key={band} className="flex justify-between text-[12px]">
+                <div key={band} className="flex justify-between text-sm">
                   <span className="text-foreground/70">{band}</span>
                   <span className="text-foreground/90">{count}</span>
                 </div>
@@ -67,10 +67,10 @@ export default function AnalysisPanel() {
           </div>
 
           <div>
-            <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground mb-2">Missingness</p>
-            <div className="space-y-1">
+            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2">Missingness</p>
+            <div className="space-y-1.5">
               {Object.entries(data.missingness).map(([field, pct]) => (
-                <div key={field} className="flex justify-between text-[12px]">
+                <div key={field} className="flex justify-between text-sm">
                   <span className="text-foreground/70">{field}</span>
                   <span className="text-foreground/90">{pct}%</span>
                 </div>

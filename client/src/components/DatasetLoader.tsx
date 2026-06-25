@@ -66,25 +66,25 @@ export default function DatasetLoader() {
       <div className="panel-header">
         <span>Dataset</span>
         {recordCount > 0 && (
-          <span className="ml-auto text-[10px] text-muted-foreground/60 normal-case tracking-normal">
+          <span className="ml-auto text-xs text-muted-foreground/60 normal-case tracking-normal">
             {recordCount} records / {patientCount} patients
           </span>
         )}
       </div>
 
-      <div className="space-y-3">
-        <div className="flex flex-wrap gap-2">
-          <Button size="sm" variant="secondary" onClick={handleSample} disabled={loading} className="text-[11px]">
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-3">
+          <Button size="sm" variant="secondary" onClick={handleSample} disabled={loading} className="text-sm">
             Sample data
           </Button>
-          <Button size="sm" variant="secondary" onClick={() => fileRef.current?.click()} disabled={loading} className="text-[11px]">
+          <Button size="sm" variant="secondary" onClick={() => fileRef.current?.click()} disabled={loading} className="text-sm">
             Upload CSV
           </Button>
-          <Button size="sm" variant="secondary" onClick={handleJson} disabled={loading} className="text-[11px]">
+          <Button size="sm" variant="secondary" onClick={handleJson} disabled={loading} className="text-sm">
             Paste JSON
           </Button>
           {recordCount > 0 && (
-            <Button size="sm" variant="ghost" onClick={handleClear} disabled={loading} className="text-[11px] text-muted-foreground">
+            <Button size="sm" variant="ghost" onClick={handleClear} disabled={loading} className="text-sm text-muted-foreground">
               Clear
             </Button>
           )}
@@ -92,12 +92,12 @@ export default function DatasetLoader() {
         </div>
 
         {dataSource && dataSource !== "none" && (
-          <Badge variant="outline" className="text-[10px] font-normal border-border/40">
+          <Badge variant="outline" className="text-xs font-normal border-border/40">
             {dataSource === "synthetic" ? "Synthetic sample" : dataSource === "csv" ? "Uploaded CSV, stored locally" : "Pasted JSON, stored locally"}
           </Badge>
         )}
 
-        {error && <p className="text-[11px] text-destructive">{error}</p>}
+        {error && <p className="text-sm text-destructive">{error}</p>}
       </div>
     </div>
   );

@@ -85,38 +85,38 @@ export default function ReasoningAgent() {
     <div className="instrument-panel">
       <div className="panel-header">
         <span>Reasoning Agent</span>
-        <span className="ml-auto text-[9px] text-primary/60 normal-case tracking-normal">aggregate-only</span>
+        <span className="ml-auto text-xs text-muted-foreground/60 normal-case tracking-normal">aggregate-only</span>
       </div>
 
       <div className="space-y-3">
         {/* Capability toggle */}
         <button
           onClick={() => setShowCapabilities(!showCapabilities)}
-          className="text-[11px] text-muted-foreground/70 hover:text-muted-foreground transition-colors"
+          className="text-sm text-muted-foreground/70 hover:text-muted-foreground transition-colors"
         >
           {showCapabilities ? "Hide" : "Show"} capabilities
         </button>
 
         {showCapabilities && (
-          <div className="text-[11px] text-muted-foreground space-y-2 pb-2">
+          <div className="text-sm text-muted-foreground space-y-3 pb-3">
             <div>
-              <p className="text-foreground/50 uppercase text-[9px] tracking-wider mb-1">Can</p>
+              <p className="text-muted-foreground/60 uppercase text-xs tracking-wider mb-1">Can</p>
               <p>Query predefined aggregate views, report distributions, summarise missingness, compare regional aggregates</p>
             </div>
             <div>
-              <p className="text-foreground/50 uppercase text-[9px] tracking-wider mb-1">Cannot</p>
+              <p className="text-muted-foreground/60 uppercase text-xs tracking-wider mb-1">Cannot</p>
               <p>Access raw rows, execute arbitrary SQL, transmit data externally, receive patient IDs</p>
             </div>
           </div>
         )}
 
         {/* Messages */}
-        <div className="max-h-64 overflow-y-auto space-y-2">
+        <div className="max-h-80 overflow-y-auto space-y-3">
           {messages.map((msg, i) => (
             <div key={i} className={msg.role === "user" ? "text-foreground/90" : "text-muted-foreground"}>
-              <pre className="text-[11px] whitespace-pre-wrap">{msg.content}</pre>
+              <pre className="text-sm whitespace-pre-wrap">{msg.content}</pre>
               {msg.provenance && (
-                <p className="text-[9px] text-primary/50 mt-0.5">
+                <p className="text-xs text-muted-foreground/50 mt-1">
                   via {msg.provenance.tool} at {msg.provenance.timestamp}
                 </p>
               )}
@@ -132,9 +132,9 @@ export default function ReasoningAgent() {
             onChange={(e) => setInput(e.target.value)}
             placeholder={recordCount === 0 ? "Load data first..." : "Ask about the data..."}
             disabled={recordCount === 0 || processing}
-            className="flex-1 bg-input border-0 rounded-sm px-3 py-1.5 text-[12px] text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-1 focus:ring-ring"
+            className="flex-1 bg-secondary border border-border rounded px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-ring"
           />
-          <Button size="sm" type="submit" disabled={recordCount === 0 || processing} className="text-[11px] px-3">
+          <Button size="sm" type="submit" disabled={recordCount === 0 || processing} className="text-sm px-4">
             Send
           </Button>
         </form>

@@ -39,7 +39,7 @@ export default function SqlConsole() {
       <div className="panel-header">
         <span>SQL Console</span>
         {execTime !== null && (
-          <span className="ml-auto text-[10px] text-muted-foreground/60 normal-case tracking-normal">
+          <span className="ml-auto text-xs text-muted-foreground/60 normal-case tracking-normal">
             {execTime}ms
           </span>
         )}
@@ -50,7 +50,7 @@ export default function SqlConsole() {
           <select
             value={selectedQuery}
             onChange={(e) => setSelectedQuery(e.target.value)}
-            className="flex-1 bg-input border-0 rounded-sm px-3 py-1.5 text-[12px] text-foreground focus:outline-none focus:ring-1 focus:ring-ring"
+            className="flex-1 bg-secondary border border-border rounded px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-ring"
           >
             {QUERY_OPTIONS.map((q) => (
               <option key={q.id} value={q.id}>{q.label}</option>
@@ -60,13 +60,13 @@ export default function SqlConsole() {
             size="sm"
             onClick={handleRun}
             disabled={executing || recordCount === 0}
-            className="text-[11px] px-3 py-1"
+            className="text-sm px-4 py-2"
           >
             Run
           </Button>
         </div>
 
-        <pre className="bg-input/50 rounded-sm p-3 text-[11px] text-muted-foreground overflow-x-auto whitespace-pre-wrap">
+        <pre className="bg-secondary/50 rounded p-4 text-xs text-muted-foreground overflow-x-auto whitespace-pre-wrap">
           {PREDEFINED_QUERIES[selectedQuery]}
         </pre>
 
@@ -76,7 +76,7 @@ export default function SqlConsole() {
               <thead>
                 <tr className="border-b border-border/40">
                   {result.columns.map((col) => (
-                    <th key={col} className="px-2 py-1.5 text-left text-[10px] uppercase tracking-wider text-muted-foreground font-normal">
+                    <th key={col} className="px-3 py-2 text-left text-xs uppercase tracking-wider text-muted-foreground font-normal">
                       {col}
                     </th>
                   ))}
@@ -86,7 +86,7 @@ export default function SqlConsole() {
                 {result.rows.map((row, i) => (
                   <tr key={i} className="border-b border-border/20 last:border-0">
                     {result.columns.map((col) => (
-                      <td key={col} className="px-2 py-1 text-[12px] text-foreground/80">
+                      <td key={col} className="px-3 py-2 text-sm text-foreground/80">
                         {String(row[col] ?? "\u2014")}
                       </td>
                     ))}
@@ -98,11 +98,11 @@ export default function SqlConsole() {
         )}
 
         {result && result.rows.length === 0 && (
-          <p className="text-[12px] text-muted-foreground">No results.</p>
+          <p className="text-sm text-muted-foreground">No results.</p>
         )}
 
         {recordCount === 0 && (
-          <p className="text-[12px] text-muted-foreground/60">Load data to run queries.</p>
+          <p className="text-sm text-muted-foreground/60">Load data to run queries.</p>
         )}
       </div>
     </div>
